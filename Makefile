@@ -28,7 +28,7 @@ ifeq ($(CARAVEL_LITE),1)
 else
 	CARAVEL_NAME := caravel
 	CARAVEL_REPO := https://github.com/efabless/caravel 
-	CARAVEL_BRANCH := master
+	CARAVEL_BRANCH := main
 endif
 
 # Install caravel as submodule, (1): submodule, (0): clone
