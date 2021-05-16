@@ -31,7 +31,7 @@
 `timescale 1ns / 1ps
 `include "config.vh"
 
-//`define USE_POWER_PINS
+`define USE_POWER_PINS
 
 module darksocv
 (
