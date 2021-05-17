@@ -1,8 +1,11 @@
+set script_dir [file dirname [file normalize [info script]]]
+
 # User config
 set ::env(DESIGN_NAME) darkriscv
 
 # Change if needed
-set ::env(VERILOG_FILES) [glob $::env(DESIGN_DIR)/src/*.v]
+#set ::env(VERILOG_FILES) [glob $::env(DESIGN_DIR)/src/*.v]
+set ::env(VERILOG_FILES) "$script_dir/../../verilog/rtl/darkriscv.v"
 
 # Fill this
 set ::env(CLOCK_PERIOD) "20"
