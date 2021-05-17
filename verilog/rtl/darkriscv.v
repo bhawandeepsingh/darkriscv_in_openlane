@@ -48,7 +48,7 @@
 `define FCC     7'b00011_11      // fencex
 `define CCC     7'b11100_11      // exx, csrxx
 
-`define USE_POWER_PINS
+//`define USE_POWER_PINS
 
 // configuration file
 
