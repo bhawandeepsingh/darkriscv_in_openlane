@@ -55,9 +55,11 @@ module darksocv
 
     output [3:0] LED,       // on-board leds
     output [3:0] DEBUG,      // osciloscope
+	output [3:0] iaddr_out,
+	output [3:0] idata_out,
 
     // Wishbone Slave ports (WB MI A)
-    //input wb_clk_i,
+    input wb_clk_i,
     //input wb_rst_i,
     //input wbs_stb_i,
     //input wbs_cyc_i,
@@ -72,15 +74,16 @@ module darksocv
     // internal/external reset logic
 
     reg [7:0] IRES = -1;
-
+/************************************************************ No ifdef above this *********************************************************************/
 `ifdef INVRES
     always@(posedge XCLK) IRES <= XRES==0 ? -1 : IRES[7] ? IRES-1 : 0; // reset low
 `else
     always@(posedge XCLK) IRES <= XRES==1 ? -1 : IRES[7] ? IRES-1 : 0; // reset high
 `endif
+/************************************************************ No ifdef below this *********************************************************************/
 
     // clock generator logic
-    
+/************************************************************ No ifdef above this *********************************************************************/    
 `ifdef BOARD_CK_REF // Not defined
 
     //`define BOARD_CK (`BOARD_CK_REF * `BOARD_CK_MUL / `BOARD_CK_DIV)
@@ -226,8 +229,10 @@ module darksocv
     wire RES = IRES[7];    
 `endif
     // ro/rw memories
+/************************************************************ No ifdef below this *********************************************************************/
 
 
+/************************************************************ No ifdef above this *********************************************************************/
 
 `ifdef __HARVARD__ // Not used
 
@@ -259,6 +264,8 @@ module darksocv
 `else // Used - w/o HARVARD
 // Memory, instruction read into ROMFF, see line ~383, DATA read into RAMFF, see line ~431, updated with write DATAO in line ~173, 191
     reg [31:0] MEM [0:2047]; // rw memory
+	//reg [31:0] MEM [0:511]; // rw memory
+
 
     // memory initialization
 
@@ -285,6 +292,7 @@ module darksocv
     end*/
 
 `endif
+/************************************************************ No ifdef below this *********************************************************************/
 
     // darkriscv bus interface
 
@@ -296,12 +304,14 @@ module darksocv
     wire        WR,RD;
     wire [3:0]  BE;
 
+/************************************************************ No ifdef above this *********************************************************************/
 `ifdef __FLEXBUZZ__  // Not used
     wire [31:0] XATAO;        
     wire [31:0] XATAI;
     wire [ 2:0] DLEN;
     wire        RW;
 `endif
+/************************************************************ No ifdef below this *********************************************************************/
 
     wire [31:0] IOMUX [0:3];
 
@@ -309,7 +319,8 @@ module darksocv
     reg  [15:0] LEDFF  = 0;
     
     wire HLT;
-    
+
+/************************************************************ No ifdef above this *********************************************************************/    
 `ifdef __ICACHE__ // Not used
 
     // instruction cache
@@ -373,7 +384,6 @@ module darksocv
     
 `endif
 
-
 `ifdef __3STAGE__    // Used
 
     reg [31:0] ROMFF2 = 0;
@@ -393,6 +403,7 @@ module darksocv
 `else    
     assign IDATA = ROMFF;
 `endif
+
 
     always@(posedge CLK) // stage #0.5    
     begin
@@ -417,7 +428,9 @@ module darksocv
 //    assign IDATA = ROMFF;
 
 `endif
+/************************************************************ No ifdef below this *********************************************************************/
 
+/************************************************************ No ifdef above this *********************************************************************/
 `ifdef __DCACHE__ // Not used
 
     // data cache
@@ -441,6 +454,10 @@ module darksocv
     reg [31:0] WCACHEA = 0;
     
     wire WHIT = WR&&!DADDR[31]/*&&DADDR[12]*/ ? WTAG&&WCACHEA==DADDR : 1;
+
+// memory clock - muxed
+
+wire MEM_CLK = XRES ? wb_clk_i : XCLK;
 
     always@(posedge CLK)
     begin
@@ -767,6 +784,9 @@ module darksocv
     wire [`__THREADS__-1:0] TPTR;
 `endif    
 wire IDLE;
+
+assign iaddr_out = IADDR[3:0];
+assign idata_out = IDATA[3:0];
 
     darkriscv
 //    #(

@@ -92,7 +92,7 @@ darksocv design_top (
 .UART_TXD (io_out[4]),
 
 .LED (io_out[3:0]),
-.DEBUG (la_data_out[3:0]),
+.DEBUG (io_out[7:4]),
 
 .wbs_we_i (wbs_we_i),
 .wbs_sel_i (wbs_sel_i),
