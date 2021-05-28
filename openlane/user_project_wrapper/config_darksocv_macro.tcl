@@ -7,12 +7,11 @@ set ::env(DESIGN_NAME) darksocv
 #set ::env(VERILOG_FILES) [glob $::env(DESIGN_DIR)/src/*.v]
 set ::env(VERILOG_FILES) "\
 	$script_dir/../../caravel/verilog/rtl/defines.v \
-	$script_dir/../../verilog/rtl/darksocv.v \
-	$script_dir/../../verilog/rtl/darkriscv.v \
-	$script_dir/../../verilog/rtl/darkuart.v"
+	$script_dir/../../verilog/rtl/user_project_wrapper.v \
+	$script_dir/../../verilog/rtl/darksocv.v"
 
 # Fill this
-set ::env(CLOCK_PERIOD) "100"
+set ::env(CLOCK_PERIOD) "20"
 set ::env(CLOCK_PORT) "XCLK"
 
 #-> Do the below from the bash shell inside docker
@@ -58,7 +57,26 @@ set ::env(TAP_DECAP_INSERTION) 0
 #set ::env(CLOCK_TREE_SYNTH) 0
 
 # New 
+# set ::env(MACRO_PLACEMENT_CFG) $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/macro_placement.cfg
+#set ::env(MACRO_PLACEMENT_CFG) $::env(DESIGN_DIR)/macro.cfg
+set ::env(MACRO_PLACEMENT_CFG) ./macro.cfg
 
+
+#set ::env(VERILOG_FILES_BLACKBOX) [glob $::env(DESIGN_DIR)/blackboxes/*.v]
+set ::env(VERILOG_FILES_BLACKBOX) "\
+	$script_dir/../../caravel/verilog/rtl/defines.v \
+	$script_dir/../../verilog/rtl/darkriscv.v \
+	$script_dir/../../verilog/rtl/darkuart.v"
+
+#set ::env(EXTRA_LEFS) [glob $::env(DESIGN_DIR)/macros/lef/*.lef]
+set ::env(EXTRA_LEFS) "\
+	$script_dir/../../lef/darkriscv.lef \
+	$script_dir/../../lef/darkuart.lef"
+
+#set ::env(EXTRA_GDS_FILES) [glob $::env(DESIGN_DIR)/macros/gds/*.gds]
+set ::env(EXTRA_GDS_FILES) "\
+	$script_dir/../../gds/darkriscv.gds \
+	$script_dir/../../gds/darkuart.gds"
 
 #set ::env(SYNTH_FLAT_TOP) 1
 #set ::env(SYNTH_NO_FLAT) 1
@@ -66,8 +84,8 @@ set ::env(TAP_DECAP_INSERTION) 0
 
 #set ::env(FP_PDN_VOFFSET) 0
 #set ::env(FP_PDN_VPITCH) 30
-set ::env(PDN_CFG) $::env(DESIGN_DIR)/pdn.tcl
-
+#set ::env(PDN_CFG) $::env(DESIGN_DIR)/pdn.tcl
+set ::env(PDN_CFG) ./pdn.tcl
 
 
 set filename $::env(DESIGN_DIR)/$::env(PDK)_$::env(STD_CELL_LIBRARY)_config.tcl

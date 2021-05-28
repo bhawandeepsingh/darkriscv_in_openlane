@@ -48,7 +48,7 @@ module darksocv
 `endif
 
     input        XCLK,      // external clock
-    input        XRES,      // external reset
+    input        XRES_ext,      // external reset
     
     input        UART_RXD,  // UART receive line
     output       UART_TXD,  // UART transmit line
@@ -70,6 +70,17 @@ module darksocv
     //output wbs_ack_o,
     //output [31:0] wbs_dat_o
 );
+
+
+// Reset synchronizer
+reg XRES_reg, XRES;
+always @ (posedge XCLK)
+	begin
+		XRES_reg <= # 0.1 XRES_ext;
+		XRES <= # 0.1 XRES_reg;
+	end
+
+
 
     // internal/external reset logic
 
@@ -263,8 +274,8 @@ module darksocv
 
 `else // Used - w/o HARVARD
 // Memory, instruction read into ROMFF, see line ~383, DATA read into RAMFF, see line ~431, updated with write DATAO in line ~173, 191
-    //reg [31:0] MEM [0:2047]; // rw memory
-	reg [31:0] MEM [0:511]; // rw memory
+    reg [31:0] MEM [0:2047]; // rw memory
+	//reg [31:0] MEM [0:511]; // rw memory
 
 
     // memory initialization
@@ -760,6 +771,18 @@ wire MEM_CLK = XRES ? wb_clk_i : XCLK;
 //    )
     uart0
     (
+
+    `ifdef USE_POWER_PINS
+	.vdda1(vdda1),	// User area 1 3.3V power
+	.vdda2(vdda2),	// User area 2 3.3V power
+	.vssa1(vssa1),	// User area 1 analog ground
+	.vssa2(vssa2),	// User area 2 analog ground
+	.vccd1(vccd1),	// User area 1 1.8V power
+	.vccd2(vccd2),	// User area 2 1.8V power
+	.vssd1(vssd1),	// User area 1 digital ground
+	.vssd2(vssd2),	// User area 2 digital ground
+    `endif
+
       .CLK(CLK),
       .RES(RES),
       .RD(!HLT&&RD&&DADDR[31]&&DADDR[3:2]==1),
@@ -795,6 +818,18 @@ assign idata_out = IDATA[3:0];
 //    ) 
     core0 
     (
+
+    `ifdef USE_POWER_PINS
+	.vdda1(vdda1),	// User area 1 3.3V power
+	.vdda2(vdda2),	// User area 2 3.3V power
+	.vssa1(vssa1),	// User area 1 analog ground
+	.vssa2(vssa2),	// User area 2 analog ground
+	.vccd1(vccd1),	// User area 1 1.8V power
+	.vccd2(vccd2),	// User area 2 1.8V power
+	.vssd1(vssd1),	// User area 1 digital ground
+	.vssd2(vssd2),	// User area 2 digital ground
+    `endif
+
 `ifdef __3STAGE__
         .CLK(CLK),
 `elsif  __WAITSTATES__
