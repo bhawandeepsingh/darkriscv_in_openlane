@@ -274,8 +274,8 @@ always @ (posedge XCLK)
 
 `else // Used - w/o HARVARD
 // Memory, instruction read into ROMFF, see line ~383, DATA read into RAMFF, see line ~431, updated with write DATAO in line ~173, 191
-    reg [31:0] MEM [0:2047]; // rw memory
-	//reg [31:0] MEM [0:511]; // rw memory
+    //reg [31:0] MEM [0:2047]; // rw memory
+	reg [31:0] MEM [0:15]; // rw memory
 
 
     // memory initialization

@@ -34,7 +34,7 @@ set ::env(PL_ROUTABILITY_DRIVEN) 1
 set ::env(GLB_RT_ADJUSTMENT) .20
 #set ::env(GLOBAL_ROUTER) "cugr"
 #set ::env(DETAILED_ROUTER) "drcu"
-
+#set ::env(GLB_RT_OVERFLOW_ITERS) 200
 
 set ::env(FP_PDN_AUTO_ADJUST) "1"
 
@@ -66,7 +66,7 @@ set ::env(FP_PDN_HPITCH) $::env(FP_PDN_VPITCH)
 
 
 
-set ::env(PL_RANDOM_GLB_PLACEMENT) 1
+#set ::env(PL_RANDOM_GLB_PLACEMENT) 1
 #set ::env(PL_BASIC_PLACEMENT) 0
 
 set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 0
@@ -75,7 +75,7 @@ set ::env(PL_RESIZER_BUFFER_INPUT_PORTS) 0
 set ::env(PL_RESIZER_BUFFER_OUTPUT_PORTS) 0
 
 set ::env(DIODE_INSERTION_STRATEGY) 0
-#set ::env(FILL_INSERTION) 0
+set ::env(FILL_INSERTION) 0
 set ::env(TAP_DECAP_INSERTION) 0
 #set ::env(CLOCK_TREE_SYNTH) 0
 
@@ -101,7 +101,7 @@ set ::env(TAP_DECAP_INSERTION) 0
 #	$script_dir/../../gds/darkriscv.gds \
 #	$script_dir/../../gds/darkuart.gds"
 
-#set ::env(SYNTH_FLAT_TOP) 1
+set ::env(SYNTH_FLAT_TOP) 1
 #set ::env(SYNTH_NO_FLAT) 1
 
 
