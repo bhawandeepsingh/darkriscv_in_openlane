@@ -28,7 +28,7 @@ set ::env(CLOCK_NET) $::env(CLOCK_PORT)
 set ::env(SYNTH_MAX_TRANS) "0.2"
 
 set ::env(FP_CORE_UTIL) "40"
-set ::env(PL_TARGET_DENSITY) [ expr ($::env(FP_CORE_UTIL)+5) / 100.0 ]
+set ::env(PL_TARGET_DENSITY) [ expr ($::env(FP_CORE_UTIL)+1) / 100.0 ]
 
 set ::env(PL_ROUTABILITY_DRIVEN) 1
 set ::env(GLB_RT_ADJUSTMENT) .20
@@ -67,7 +67,7 @@ set ::env(FP_PDN_HPITCH) $::env(FP_PDN_VPITCH)
 
 
 #set ::env(PL_RANDOM_GLB_PLACEMENT) 1
-#set ::env(PL_BASIC_PLACEMENT) 0
+set ::env(PL_BASIC_PLACEMENT) 0
 
 set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 0
 set ::env(PL_RESIZER_TIMING_OPTIMIZATIONS) 0
