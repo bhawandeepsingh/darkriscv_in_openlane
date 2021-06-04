@@ -12,7 +12,7 @@ set ::env(VERILOG_FILES) "\
 	$script_dir/../../verilog/rtl/darkuart.v"
 
 # Fill this
-set ::env(CLOCK_PERIOD) "100"
+set ::env(CLOCK_PERIOD) "20"
 set ::env(CLOCK_PORT) "XCLK"
 
 #-> Do the below from the bash shell inside docker
@@ -44,7 +44,7 @@ set ::env(VDD_NETS) [list {vccd1} {vccd2} {vdda1} {vdda2}]
 set ::env(GND_NETS) [list {vssd1} {vssd2} {vssa1} {vssa2}]
 set ::env(FP_PDN_CHECK_NODES) 0
 
-set ::env(PL_RANDOM_GLB_PLACEMENT) 1
+#set ::env(PL_RANDOM_GLB_PLACEMENT) 1
 #set ::env(PL_BASIC_PLACEMENT) 0
 
 set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 0
@@ -54,19 +54,20 @@ set ::env(PL_RESIZER_BUFFER_OUTPUT_PORTS) 0
 
 set ::env(DIODE_INSERTION_STRATEGY) 0
 #set ::env(FILL_INSERTION) 0
-set ::env(TAP_DECAP_INSERTION) 0
+#set ::env(TAP_DECAP_INSERTION) 0
 #set ::env(CLOCK_TREE_SYNTH) 0
+set ::env(RUN_CVC) 0
 
 # New 
+set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
 
-
-#set ::env(SYNTH_FLAT_TOP) 1
+set ::env(SYNTH_FLAT_TOP) 1
 #set ::env(SYNTH_NO_FLAT) 1
 
 
 #set ::env(FP_PDN_VOFFSET) 0
 #set ::env(FP_PDN_VPITCH) 30
-set ::env(PDN_CFG) $::env(DESIGN_DIR)/pdn.tcl
+#set ::env(PDN_CFG) $::env(DESIGN_DIR)/pdn.tcl
 
 
 
