@@ -1,12 +1,4 @@
-The project is a realization of darkriscv (https://github.com/darklife/darkriscv) in sky130A technology using openlane flow (details below)
 
-The steps to build the project are - 
-
-1. git clone https://github.com/bhawandeepsingh/darkriscv_in_openlane.git
-2. cd darkriscv_in_openlane
-3. set PDK_ROOT and OPENLANE_ROOT (read on below for detailed steps on these)
-4. make darksocv
-5. make user_project_wrapper
 
 
 .. raw:: html
@@ -53,13 +45,8 @@ Table of contents
 Overview
 ========
 
-This repo contains a sample user project that utilizes the
-`caravel <https://github.com/efabless/caravel.git>`__ chip user space.
-The user project is a simple counter that showcases how to make use of
-`caravel's <https://github.com/efabless/caravel.git>`__ user space
-utilities like IO pads, logic analyzer probes, and wishbone port. The
-repo also demonstrates the recommended structure for the open-mpw
-shuttle projects.
+The project is a realization of darkriscv (https://github.com/darklife/darkriscv) in sky130A technology using openlane flow (details below)
+The repo also follows the recommended structure for the open-mpw shuttle projects.
 
 Prerequisites
 =============
@@ -77,8 +64,8 @@ To setup caravel, run the following:
     # If you want to install caravel at a different location, run "export CARAVEL_ROOT=<caravel-path>"
     # Disable submodule installation if needed by, run "export SUBMODULE=0"
     
-    git clone https://github.com/efabless/caravel_user_project.git
-    cd caravel_user_project
+    git clone https://github.com/bhawandeepsingh/darkriscv_in_openlane.git
+    cd darkriscv_in_openlane
     make install
 
 To update the installed caravel to the latest, run:
@@ -265,8 +252,8 @@ To reproduce hardening this project, run the following:
 
 .. code:: bash
 
-   # Run openlane to harden user_proj_example
-   make user_proj_example
+   # Run openlane to harden darksocv
+   make darksocv
    # Run openlane to harden user_project_wrapper
    make user_project_wrapper
 
