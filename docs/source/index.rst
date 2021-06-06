@@ -1,3 +1,14 @@
+The project is a realization of darkriscv (https://github.com/darklife/darkriscv) in sky130A technology using openlane flow (details below)
+
+The steps to build the project are - 
+
+1. git clone https://github.com/bhawandeepsingh/darkriscv_in_openlane.git
+2. cd darkriscv_in_openlane
+3. set PDK_ROOT and OPENLANE_ROOT (read on below for detailed steps on these)
+4. make darksocv
+5. make user_project_wrapper
+
+
 .. raw:: html
 
    <!---
