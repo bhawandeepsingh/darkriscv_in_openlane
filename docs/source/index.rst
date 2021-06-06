@@ -21,7 +21,7 @@
    # SPDX-License-Identifier: Apache-2.0
    -->
 
-Caravel User Project
+darkriscv in openlane
 ====================
 
 |License| |User CI| |Caravel Build|
